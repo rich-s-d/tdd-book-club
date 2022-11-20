@@ -1,0 +1,1 @@
+`python -m pytest "src/tests" -p no:warnings --cov="src"  --cov-report html`
