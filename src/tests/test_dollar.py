@@ -7,6 +7,7 @@ import os
 sys.path.append(os.path.join(sys.path[0][:-5]))
 from dollar import Dollar
 from franc import Franc
+from money import Money
 
 
 def test_multiplication():
@@ -34,3 +35,5 @@ def test_franc_multiplication():
 def test_equality():
     assert (Dollar(5).equals(Dollar(5)))
     assert not Dollar(5).equals(Dollar(6))
+    assert (Franc(5).equals(Franc(5)))
+    assert not Franc(5).equals(Franc(6))

@@ -1,7 +1,7 @@
+from money import Money
 
 
-
-class Franc:
+class Franc(Money):
     def __init__(self, amount) -> None:
         self.amount = amount
         
@@ -9,10 +9,6 @@ class Franc:
         #self.amount = self.amount * multiplier
         return Franc(self.amount * multiplier)
 
-
-    def equals(self, object: object):
-        franc: Franc = object
-        return self.amount == franc.amount
         
 
     
