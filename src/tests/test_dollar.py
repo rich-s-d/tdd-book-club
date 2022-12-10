@@ -5,35 +5,36 @@ import sys
 import os
 # Add path to src modules.
 sys.path.append(os.path.join(sys.path[0][:-5]))
-from dollar import Dollar
-from franc import Franc
+#from franc import Franc
 from money import Money
+#from dollar import Dollar
 
 
 def test_multiplication():
     #arrange
-    five = Dollar(5)
+    five: Money = Money.dollar(5)
     #act
     #assert
-    assert Dollar(10).equals(five.times(2))
+    assert Money.dollar(10).equals(five.times(2))
     #act
     #assert
-    assert Dollar(15).equals(five.times(3))
+    assert Money.dollar(15).equals(five.times(3))
 
 
 def test_franc_multiplication():
     #arrange
-    five = Franc(5)
+    five: Money = Money.franc(5)
     #act
     #assert
-    assert Franc(10).equals(five.times(2))
+    assert Money.franc(10).equals(five.times(2))
     #act
     #assert
-    assert Franc(15).equals(five.times(3))
+    assert Money.franc(15).equals(five.times(3))
 
 
 def test_equality():
-    assert (Dollar(5).equals(Dollar(5)))
-    assert not Dollar(5).equals(Dollar(6))
-    assert (Franc(5).equals(Franc(5)))
-    assert not Franc(5).equals(Franc(6))
+    assert (Money.dollar(5).equals(Money.dollar(5)))
+    assert not Money.dollar(5).equals(Money.dollar(6))
+    assert (Money.franc(5).equals(Money.franc(5)))
+    assert not Money.franc(5).equals(Money.franc(6))
+    assert not Money.franc(5).equals(Money.dollar(5))
