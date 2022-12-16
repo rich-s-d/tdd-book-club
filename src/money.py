@@ -3,10 +3,10 @@ import pytest
 #from franc import Franc
 from abc import ABC, abstractmethod
 
-
 class Money(ABC):
-    def __init__(self, amount) -> None:
+    def __init__(self, amount:int, currency: str) -> None:
         self.amount = amount
+        self.currency_variable = currency
 
     def equals(self, object: object):
         money: Money = object
@@ -16,30 +16,30 @@ class Money(ABC):
 
     
     def dollar(amount: int):
-        return Dollar(amount)
+        return Dollar(amount, "USD")
 
     def franc(amount: int):
-        return Franc(amount)
+        return Franc(amount, "CHF")
 
-    # #@abstractmethod
-    # def times(self, multiplier: int):
-    #     return Money(self.amount * multiplier)
+    @abstractmethod
+    def times(self, multiplier: int):
+        pass
+
+    def currency(self):
+        return self.currency_variable
 
 
 class Franc(Money):
-    def __init__(self, amount) -> None:
-        self.amount = amount
-        
-    def times(self, multiplier):
-        #self.amount = self.amount * multiplier
-        return Franc(self.amount * multiplier)
-     
+    def __init__(self, amount: int, currency: str) -> None:
+        super().__init__(amount, currency)
+
+    def times(self, multiplier) -> Money:
+        return Money.franc(self.amount * multiplier)
 
 
 class Dollar(Money):
-    def __init__(self, amount) -> None:
-        self.amount = amount
+    def __init__(self, amount: int, currency: str) -> None:
+        super().__init__(amount, currency)
         
-    def times(self, multiplier):
-        #self.amount = self.amount * multiplier
-        return Dollar(self.amount * multiplier)
+    def times(self, multiplier) -> Money:
+        return Money.dollar(self.amount * multiplier)
