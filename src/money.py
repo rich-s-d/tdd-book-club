@@ -12,19 +12,20 @@ class Money(ABC):
         money: Money = object
         print(self.__class__.__name__)
         #pytest.set_trace()
-        return self.amount == money.amount and self.__class__.__name__ == money.__class__.__name__
+        return self.amount == money.amount and self.currency_variable == money.currency_variable
 
     
     def dollar(amount: int):
-        return Dollar(amount, "USD")
+        return Money(amount, "USD")
 
     def franc(amount: int):
-        return Franc(amount, "CHF")
+        return Money(amount, "CHF")
 
-    @abstractmethod
+   # @abstractmethod
     def times(self, multiplier: int):
-        pass
+        return Money(self.amount * multiplier, self.currency_variable)
 
+    #@abstractmethod
     def currency(self):
         return self.currency_variable
 
@@ -33,13 +34,15 @@ class Franc(Money):
     def __init__(self, amount: int, currency: str) -> None:
         super().__init__(amount, currency)
 
-    def times(self, multiplier) -> Money:
-        return Money.franc(self.amount * multiplier)
+    # def times(self, multiplier) -> Money:
+    #     # return Money.franc(self.amount * multiplier)
+    #     return Franc(self.amount * multiplier, self.currency)
 
 
 class Dollar(Money):
     def __init__(self, amount: int, currency: str) -> None:
         super().__init__(amount, currency)
         
-    def times(self, multiplier) -> Money:
-        return Money.dollar(self.amount * multiplier)
+    # def times(self, multiplier) -> Money:
+    #     # return Money.dollar(self.amount * multiplier)
+    #     return Dollar(self.amount * multiplier, self.currency)

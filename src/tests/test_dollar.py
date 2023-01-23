@@ -6,8 +6,7 @@ import os
 # Add path to src modules.
 sys.path.append(os.path.join(sys.path[0][:-5]))
 #from franc import Franc
-from money import Money
-#from dollar import Dollar
+from money import Money, Franc, Dollar
 
 
 def test_multiplication():
@@ -46,3 +45,6 @@ def test_equality():
 def test_currency():
     assert "USD" == Money.dollar(1).currency()
     assert "CHF" == Money.franc(1).currency()
+
+def test_different_class_equality():
+    assert Money(10, "CHF").equals(Franc(10, "CHF"))
