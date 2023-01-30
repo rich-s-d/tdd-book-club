@@ -30,19 +30,20 @@ class Money(ABC):
         return self.currency_variable
 
 
-class Franc(Money):
-    def __init__(self, amount: int, currency: str) -> None:
-        super().__init__(amount, currency)
+# Redundant with new code structure (we gutted the subclasses Franc and Dollar.)
+# class Franc(Money):
+#     def __init__(self, amount: int, currency: str) -> None:
+#         super().__init__(amount, currency)
 
-    # def times(self, multiplier) -> Money:
-    #     # return Money.franc(self.amount * multiplier)
-    #     return Franc(self.amount * multiplier, self.currency)
+#     # def times(self, multiplier) -> Money:
+#     #     # return Money.franc(self.amount * multiplier)
+#     #     return Franc(self.amount * multiplier, self.currency)
 
 
-class Dollar(Money):
-    def __init__(self, amount: int, currency: str) -> None:
-        super().__init__(amount, currency)
+# class Dollar(Money):
+#     def __init__(self, amount: int, currency: str) -> None:
+#         super().__init__(amount, currency)
         
-    # def times(self, multiplier) -> Money:
-    #     # return Money.dollar(self.amount * multiplier)
-    #     return Dollar(self.amount * multiplier, self.currency)
+#     # def times(self, multiplier) -> Money:
+#     #     # return Money.dollar(self.amount * multiplier)
+#     #     return Dollar(self.amount * multiplier, self.currency)
