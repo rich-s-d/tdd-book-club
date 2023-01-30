@@ -6,7 +6,7 @@ import os
 # Add path to src modules.
 sys.path.append(os.path.join(sys.path[0][:-5]))
 #from franc import Franc
-from money import Money
+from money import Money, Bank
 
 
 def test_multiplication():
@@ -44,3 +44,16 @@ def test_equality():
 def test_currency():
     assert "USD" == Money.dollar(1).currency()
     assert "CHF" == Money.franc(1).currency()
+
+
+def test_simple_addition():
+    sum = Money.dollar(5).plus(Money.dollar(5)).amount
+    assert Money.dollar(10).amount == sum
+
+
+def test_simple_addition():
+    five: Money = Money.dollar(5)
+    sum = five.plus(five)
+    bank: Bank = Bank()
+    reduced: Money = bank.reduce(sum, "USD")
+    assert Money.dollar(10).amount == reduced.amount
