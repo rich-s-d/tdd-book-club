@@ -1,6 +1,4 @@
 import pytest
-#from dollar import Dollar
-#from franc import Franc
 from abc import ABC, abstractmethod
 
 class Money(ABC):
@@ -16,8 +14,8 @@ class Money(ABC):
         return self.amount == money.amount and self.currency_variable == money.currency_variable
 
 
-    def plus(self, added):
-        return Money((self.amount + added.amount), self.currency_variable)
+    def plus(self, addend):
+        return Sum(Money(self.amount, self.currency_variable), addend)
 
     
 
@@ -42,10 +40,24 @@ class Bank():
     def __init__(self) -> None:
         return None
 
+    # I've not used an Expression Interface, so I've left the type checking for now.
+    # See https://realpython.com/python-interface/ for details on python interfaces.
     def reduce(self, source, to: str):
-        return Money.dollar(10)
+        if type(source) == Money:
+            return source
+        else:
+            sum: Sum = source
+            return sum.reduce(to)
 
 
+class Sum():
+    def __init__(self, augend: Money, addend: Money):
+        self.augend: Money = augend
+        self.addend: Money = addend
+
+    def reduce(self, to: str):
+        amount: int = self.augend.amount + self.addend.amount
+        return Money(amount, to)
 
 
 
